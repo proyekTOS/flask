@@ -1,0 +1,173 @@
+<html>
+<head>
+	  <meta charset="utf-8">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      <style>
+        #choice, #choice_result {
+          margin-top: 100px;
+        }
+        #pilihan1, #pilihan2 {
+              height: 200px;
+              /*width: 400px;*/
+              padding: 30px;
+              vertical-align: middle;
+              text-align: center;
+              -webkit-font-smoothing: antialiased;
+              border-radius: 10px;
+        }
+        #pilihan1 {
+            background-color: #1BF064;
+        }
+        #pilihan2 {
+            background-position: -460px 0px;
+            background-color: #cc2323;
+        }
+        #pilihan1:hover, #pilihan2:hover {
+          opacity: 0.8;
+        }
+        #green_bar, #red_bar {
+          /*width: 50%;*/
+          height: 30px;
+        }
+        #green_bar {
+          width:20%;
+          background-color: #1BF064;
+          float: left;
+          border-bottom-left-radius: 50px;
+          border-top-left-radius: 50px;
+        }
+        #red_bar {
+          width: 80%;
+          background-color: #cc2323;
+          float:right;
+          border-bottom-right-radius: 50px;
+          border-top-right-radius: 50px;
+        }
+        #poll2 {
+          text-align: right;
+          float:right;
+        }
+        #poll1 {
+          float:left;
+        }
+        #poll1, #poll2 {
+          width: 50%;
+        }
+        .next {
+
+        }
+        h4 {
+          vertical-align: middle;
+          text-decoration: none;
+          color: #fff;
+          line-height: 30px;
+          padding: 8px 5px 8px 5px;
+          text-shadow: 0.5px 0.5px black;
+          display: block;
+        }
+      </style>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#myPage">HOME</a></li>
+        <li><a href="#tour">PROFILE</a></li>
+        <li><a href="#contact">CREATE QUESTION</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container" id="choice">
+<h1 id="question" class="text-center">Ketika pacar kamu sendirian dirumah, kamu akan...</h1>
+<div class="row">
+  <div class="col-sm-2">
+  </div>
+  <div id="pilihan1" class="col-sm-3" >
+  <h4>Langsung cabut</h4>
+  </div>
+  <div  class="col-sm-2 text-center">
+  <h3>ATAU</h3>
+  </div>
+  <div id="pilihan2" class="col-sm-3" >
+  <h4>Lanjut main game</h4>
+  </div>
+  <div class="col-sm-2" >
+  </div>
+</div>
+</div>
+
+<script>
+  $(function(){
+      $('#pilihan1').click(function(){
+        $('#choice').hide();
+        // ubah var green_poll & red_poll untuk disambungin php
+        var green_poll = 59;
+        var red_poll = 279;
+        var width_green = 59*100/279;
+        width_green = width_green.toFixed(); //pembulatan
+        var width_red = 100 - width_green ;
+        width_red = width_red.toFixed(); // pembulatan
+        $('#green_bar').css('width', width_green + '%');
+        $('#red_bar').css('width', width_red + '%');
+        $("#poll1").text(green_poll + ' Votes (' + width_green + '%)');
+        $("#poll2").text(red_poll + ' Votes (' + width_red + '%)');
+        // ubah var pilihan1 & pilihan2 sesuai database
+        var pilihan1 = "Langsung cabut";
+        var pilihan2 = "Lanjut main game";
+        $("#summary1").text(width_green + '% : ' + pilihan1);
+        $("#summary2").text(width_red + '% : ' + pilihan2);
+        $('#choice_result').show();
+      });
+    });
+</script>
+
+<!-- Setelah vote, ini muncul -->
+<div class="container-fluid" id="choice_result" hidden>
+  <h1 class="text-center">Kamu Pilih Untuk:</h1>
+  <h1 class="text-center"><b id="result">Lanjut Main Game</b></h1>
+  <div class="row">
+    <div class="col-sm-3" >
+    </div>
+    <div class="col-sm-6">
+      <div class="container-fluid">
+        <div id="poll1">160 Votes (20%)</div>
+        <div id="poll2">40 Votes (80%)</div>
+      </div>
+      <div id="bar">
+        <div id="green_bar"></div>
+        <div id="red_bar"></div>
+      </div>
+    </div>
+    <div class="col-sm-3" >
+    </div>
+  </div>
+
+  <br>
+  <div id="summary1" style="display:flex;justify-content:center;align-items:center;">20% : Langsung Cabut </div>
+  <div id="summary2" style="display:flex;justify-content:center;align-items:center;">80% : Lanjut Main Game </div>
+  <br>
+  <div class="container">
+    <div class="col-sm-5" >
+      </div>
+    <button type="button" class="col-sm-2 btn btn-success next">Next</button>
+    <div class="col-sm-5" >
+      </div>
+  </div>
+</div>
+</body>
+</html>
